@@ -18,7 +18,7 @@
              <p>Model - {{ $item->model }}</p>
              <p>CODE - {{ $item->identifier }}</p>
              <p>Extras - {{ $item->attributes }}</p>
-             <p><img src="{{ asset('images').DIRECTORY_SEPARATOR.$item->image }}" alt="{{ $item->item_slug }}"></p>
+             <p><img src="{{ asset('images').DIRECTORY_SEPARATOR.$item->image }}" style="width: 50%;" alt="{{ $item->item_slug }}"></p>
             {!! Form::open(['url' => route('orderform.store',$item->item_slug),'files' => true]) !!}
                
 
