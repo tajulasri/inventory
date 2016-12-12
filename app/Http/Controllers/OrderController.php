@@ -20,7 +20,7 @@ class OrderController extends Controller
     public function __construct(OrderRepository $order)
     {
         $this->order = $order;
-        $this->middleware('auth',['except' => 'order','saveOrder']);
+        $this->middleware('auth',['except' => ['order','saveOrder']]);
     }
 
     /**

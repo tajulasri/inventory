@@ -41,7 +41,7 @@
 					</tr>
 					@endforeach
       			@else
-
+					<div class="alert alert-info">No record found.</div>
       			@endif
       		</tbody>
       	</table>
