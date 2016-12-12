@@ -11,10 +11,6 @@
     </div>
 
     <div class="form-group">
-        <input type="file" name="file[]" />
-    </div>
-
-    <div class="form-group">
         {!! Form::submit('New upload',['class' => 'btn btn-danger']) !!}
     </div>
     {!! Form::close() !!}

@@ -10,7 +10,7 @@ class Item extends Model
 {
 	protected $primaryKey = 'id';
     protected $table = 'items';
-    protected $fillable = ['brand','model','identifier','image','buy','sell'];
+    protected $fillable = ['brand','model','identifier','attributes','image','buy','sell'];
     protected $guard = [];
 
     const PENDING_POST = 0;
@@ -48,8 +48,4 @@ class Item extends Model
         return $identifier;
     }
 
-//    public function getIdentifierAttribute($value)
-//    {
-//        $this->attributes['identifier'] = strtoupper($value);
-//    }
 }
