@@ -30,8 +30,10 @@
                         @foreach($items as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
-                            <td><a href="{{ $item->path }}">{{ $item->path }}</a></td>
-                            <td></td>
+                            <td><a href="{{ $item->file_path }}">{{ $item->file_path }}</a></td>
+                            <td>
+                                <a href="{{ route('image.delete',$item->id) }}"> <i class="glyphicon glyphicon-trash"></i> remove</a>
+                            </td>
                         </tr>
                         @endforeach
                         @endif

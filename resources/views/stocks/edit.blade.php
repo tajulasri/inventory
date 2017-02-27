@@ -62,7 +62,7 @@
 
 					<div class="form-group">
 					{!! Form::label('image') !!}
-					{!! Form::file('image',['class' => 'file-upload']) !!}
+					{!! Form::text('image',old('image'),['class' => 'form-control','placeholder' => 'Image url']) !!}
 				</div>
 
 				<div class="form-group">

@@ -32,7 +32,9 @@
 							    <li><a href="{{ route('order.show',$item->id) }}">View</a></li>
 							    <li>
                 
-                      <a type="submit" href="{{ route('item.destroy',$item->id) }}" onclick="if(confirm('Delete this item?')) { return true; } return false;"> Delete</a>
+                      			<form action="{{ route('item,delete',$item->id) }}" method="DELETE">
+										<button type="submit" onclick="return confirm('Delete this item?');"> Delete</button>
+								</form>
                     
                   </li>
 							  </ul>

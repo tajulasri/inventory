@@ -219,9 +219,24 @@ class ItemController extends Controller
 
         try {
 
-            $item = Item::where($this->order->getItemModel()
+            $filePath = explode('=',$request->image);
+            $request->image = base64_decode($filePath[1]);
+            $attributes = [
+
+                'brand' =>  $request->brand,
+                'item_slug' => $request->item_slug,
+                'model' => $request->model,
+                'identifier' => $request->identifier,
+                'attributes' => $request->get('attributes'), //attributes reserve keywords
+                'category_id' => $request->category_id,
+                'buy' => $request->buy,
+                'sell' => $request->sell,
+                'image' => base64_decode($filePath[1]),
+            ];
+
+            Item::where($this->order->getItemModel()
                     ->getKeyName(),$id)
-                    ->update($request->except('_token','_method'));
+                    ->update($attributes);
 
             return redirect()->back()->with(self::SUCCESS_KEY,self::SUCCESS_MESSAGE);
         }
@@ -242,6 +257,7 @@ class ItemController extends Controller
         try {
 
             $this->order->getItemById($id)->delete();
+            Stock::where('item_id',$id)->delete();
             return redirect()->back()->with(self::SUCCESS_KEY,self::SUCCESS_MESSAGE);
         }
         catch(Exception $e) {

@@ -6,15 +6,17 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Image;
 use Illuminate\Support\Facades\Response;
+use Intervention\Image\Exception\NotFoundException;
+use Intervention\Image\Exception\NotReadableException;
 
 class HomeController extends Controller
 {
 
     private $filesystem;
+
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * HomeController constructor.
+     * @param Filesystem $filesystem
      */
     public function __construct(Filesystem $filesystem)
     {
@@ -36,21 +38,27 @@ class HomeController extends Controller
     {
         //stupid image api
         $realPath = base64_decode($request->x);
-
         if(empty($request->x)) {
-
-            return response()->json(['_Error' => 'Image not found']);
+            return response()->json([self::ERROR_KEY => 'Image not found']);
         }
 
         $path = public_path('images').DIRECTORY_SEPARATOR.$realPath;
-        $img = Image::make($path);
-        // create response and add encoded image data
-        $response = Response::make($img->encode('png'));
+        try {
+            $img = Image::make($path);
+            // create response and add encoded image data
+            $response = Response::make($img->encode('png'));
+            // set content-type
+            $response->header('Content-Type', 'image/png');
+            // output
+            return $response;
+        }
+        catch (NotReadableException $e ){
 
-        // set content-type
-        $response->header('Content-Type', 'image/png');
+            return response()->json([self::ERROR_KEY => 'Image not found']);
+        }
+        catch (NotFoundException $e ) {
 
-        // output
-        return $response;
+            return response()->json([self::ERROR_KEY => 'Image not found']);
+        }
     }
 }

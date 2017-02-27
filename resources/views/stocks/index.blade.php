@@ -36,16 +36,17 @@
 							  <a href="#" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
 							  <ul class="dropdown-menu">
 							    <li><a href="{{ route('item.show',$item->id) }}">View</a></li>
-							    <li>
-
 								  <li><a href="{{ route('image.stream',['x' => base64_encode($item->image)]) }}">Image</a></li>
 								  <li>
-                
-                      <a type="submit" href="{{ route('item.destroy',$item->id) }}" onclick="if(confirm('Delete this item?')) { return true; } return false;"> Delete</a>
-                    
-                  </li>
+								  </li>
 							  </ul>
 							</div>
+
+							<form action="{{ route('item.destroy', $item->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+							</form>
 						</td>
 					</tr>
 					@endforeach

@@ -36,4 +36,5 @@ Route::post('client/request-item',['uses' => 'RequestItemController@store','as' 
 
 Route::get('image/source',['uses' => 'HomeController@streamImage','as' => 'image.stream']);
 Route::get('image/bucket',['uses' => 'ImageController@index','as' => 'image.index']);
+Route::get('image/bucket/{id}/delete',['uses' => 'ImageController@delete','as' => 'image.delete']);
 Route::post('image/bucket',['uses' => 'ImageController@upload','as' => 'image.bucket.upload']);
